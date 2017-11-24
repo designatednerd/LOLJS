@@ -36,8 +36,7 @@ class MainWindow extends Component {
   render() {
     return (
     <div>
-      <header className="mw-header">Window Header
-      </header>
+      <header className="mw-header">{this.state.log.length} requests</header>
       <div className="mw-table-container">
       <Table className="mw-log-table" responsive striped bordered hover>
         <thead>
