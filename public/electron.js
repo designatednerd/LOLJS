@@ -48,6 +48,27 @@ function createMainWindow() {
     ipcMain.on('get-server-address', (event) => {
       event.sender.send('server-address', 'http://localhost:' + serverPort)
     })   
+
+    ipcMain.on('open-file', (event) => {
+      const dialogOptions = {
+        title: 'Select JSON File',
+        properties: ['openFile'],
+        filters: [{ 
+          name: "JSON", 
+          extensions: ['json'],
+        }]
+      };
+
+      dialog.showOpenDialog(mainWindow, dialogOptions, (filePaths) => {
+        if (!filePaths) return; 
+        const filePath = filePaths[0];
+
+        fs.readFile(filePath, 'utf8', (error, json) => {
+          let endPoint = path.basename(filePath, '.json')
+          srv.addPath(endPoint, JSON.parse(json))
+        })
+      })
+    })
     
     return window;
 }

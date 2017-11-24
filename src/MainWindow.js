@@ -45,7 +45,7 @@ class MainWindow extends Component {
     return (
     <div>
       <header className="mw-header">{this.state.log.length} requests on:<span className="mw-header-link" onClick={ (e) => this.openURL() }>{this.state.url}</span> 
-        <Button className="mw-header-button" bsStyle="info">Add File...</Button>
+        <Button className="mw-header-button" bsStyle="info" onClick={ (e) => this.addFile() } >Add File...</Button>
       </header>
       <div className="mw-table-container">
       <Table className="mw-log-table" responsive striped bordered hover>
@@ -77,6 +77,10 @@ class MainWindow extends Component {
 
   openURL() {
     electron.shell.openExternal(this.state.url)
+  }
+
+  addFile() {
+    ipcRenderer.send('open-file')
   }
 }
 
