@@ -28,7 +28,19 @@ class Server {
     
     this.app.get('/'+path+'/:id', (request, response) => {
       const found = json.filter((item) => item.id == request.params.id)
-      //TODO: return the response or error
+      if (found.length == 0) {        
+        response.status = 404
+        response.send("LOL Nope!")
+      } else {
+        response.status = 200
+        response.json(found)        
+      }
+
+      this.logger({
+        time: (new Date()).toUTCString(), 
+        status: response.status, 
+        url: request.originalUrl
+      });
     });
   }
 }
