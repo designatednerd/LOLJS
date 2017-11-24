@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 // bootstrap
 import { Table } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
@@ -43,7 +44,9 @@ class MainWindow extends Component {
   render() {
     return (
     <div>
-      <header className="mw-header">{this.state.log.length} requests on:<span className="mw-header-link" onClick={ (e) => this.openURL() }>{this.state.url}</span> </header>
+      <header className="mw-header">{this.state.log.length} requests on:<span className="mw-header-link" onClick={ (e) => this.openURL() }>{this.state.url}</span> 
+        <Button className="mw-header-button" bsStyle="info">Add File...</Button>
+      </header>
       <div className="mw-table-container">
       <Table className="mw-log-table" responsive striped bordered hover>
         <thead>
