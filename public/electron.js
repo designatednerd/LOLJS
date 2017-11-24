@@ -20,7 +20,6 @@ let tray;
 // create and show main window on app start
 app.on('ready', () => {
   mainWindow = createMainWindow();
-  tray = createTray()
 });
 
 function createTray() {
@@ -32,6 +31,7 @@ function createTray() {
       label: "Show window...", 
       click: () => {
         // Display the window
+        showWindow()       
       }
     },
     {
@@ -45,6 +45,15 @@ function createTray() {
 //
 //  Window
 //
+
+function showWindow() {
+  app.dock.show()
+  mainWindow.show()
+
+  setTimeout(() => { tray.destroy(); tray = null; }, 500) //MS
+}
+
+
 function createMainWindow() {
     // setup the window
     let window = new BrowserWindow({
@@ -91,6 +100,13 @@ function createMainWindow() {
       })
     })
     
+
+    ipcMain.on('send-to-tray', (event) => {
+      app.dock.hide()
+      mainWindow.hide()
+      createTray()
+    })
+
     return window;
 }
 
