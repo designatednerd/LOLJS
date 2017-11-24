@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 
 // bootstrap
-import { Table } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Table, Button, Glyphicon } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
@@ -45,6 +44,7 @@ class MainWindow extends Component {
     return (
     <div>
       <header className="mw-header">{this.state.log.length} requests on:<span className="mw-header-link" onClick={ (e) => this.openURL() }>{this.state.url}</span> 
+        <Button className="mw-header-button" onClick={ (e) => this.hideWindow() }><Glyphicon glyph="collapse-up"/></Button>
         <Button className="mw-header-button" bsStyle="info" onClick={ (e) => this.addFile() } >Add File...</Button>
       </header>
       <div className="mw-table-container">
@@ -81,6 +81,10 @@ class MainWindow extends Component {
 
   addFile() {
     ipcRenderer.send('open-file')
+  }
+
+  hideWindow() {
+    ipcRenderer.send('send-to-tray')
   }
 }
 
