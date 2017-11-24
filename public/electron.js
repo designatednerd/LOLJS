@@ -15,11 +15,32 @@ const serverPort = 9000;
 //  App
 //
 let mainWindow;
+let tray; 
 
 // create and show main window on app start
 app.on('ready', () => {
   mainWindow = createMainWindow();
+  tray = createTray()
 });
+
+function createTray() {
+  const iconPath = path.join(__dirname, './tray-icon.png')  
+  tray = new Tray(iconPath);
+  tray.setToolTip("LOLJS")  
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: "Show window...", 
+      click: () => {
+        // Display the window
+      }
+    },
+    {
+      label: "Quit",
+      role: 'quit'
+    }
+  ])
+  tray.setContextMenu(contextMenu)
+}
 
 //
 //  Window
