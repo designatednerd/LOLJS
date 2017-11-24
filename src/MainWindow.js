@@ -43,7 +43,7 @@ class MainWindow extends Component {
   render() {
     return (
     <div>
-      <header className="mw-header">{this.state.log.length} requests on:<span className="mw-header-link">{this.state.url}</span> </header>
+      <header className="mw-header">{this.state.log.length} requests on:<span className="mw-header-link" onClick={ (e) => this.openURL() }>{this.state.url}</span> </header>
       <div className="mw-table-container">
       <Table className="mw-log-table" responsive striped bordered hover>
         <thead>
@@ -70,6 +70,10 @@ class MainWindow extends Component {
 
   componentWillMount() {
     ipcRenderer.send('get-server-address')
+  }
+
+  openURL() {
+    electron.shell.openExternal(this.state.url)
   }
 }
 
