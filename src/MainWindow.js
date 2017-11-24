@@ -39,7 +39,7 @@ class MainWindow extends Component {
       <header className="mw-header">Window Header
       </header>
       <div className="mw-table-container">
-      <Table className="mw-log-table" responsive>
+      <Table className="mw-log-table" responsive striped bordered hover>
         <thead>
           <tr>
             <th className="mw-time-col">Time</th>
