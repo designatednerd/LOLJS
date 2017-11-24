@@ -1,0 +1,31 @@
+.mw-header {
+  padding: 10px;
+  font-size: 1.25em;
+}
+
+.mw-header-link {
+  margin-left: 10px;
+  color: #6699ff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.mw-header-button {
+  float: right;
+  margin-left: 10px;
+}
+
+.mw-table-container {
+  position: absolute;
+  overflow-y: scroll;
+  border: 2px solid #333333;
+}
+
+.mw-intro {
+  padding: 20px;
+  color: #666666;
+}
+
+.mw-time-col {
+  width: 200px;
+}
