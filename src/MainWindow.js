@@ -31,12 +31,19 @@ class MainWindow extends Component {
         log: newLog
       }))
     });
+
+    ipcRenderer.on('server-address', (event, address) => {
+      // Replace the existing state with a copy of one with something changed
+      this.setState(Object.assign({} , this.state, {
+        url: address
+      }))
+    }) 
   }
 
   render() {
     return (
     <div>
-      <header className="mw-header">{this.state.log.length} requests</header>
+      <header className="mw-header">{this.state.log.length} requests on:<span className="mw-header-link">{this.state.url}</span> </header>
       <div className="mw-table-container">
       <Table className="mw-log-table" responsive striped bordered hover>
         <thead>
@@ -59,6 +66,10 @@ class MainWindow extends Component {
       </div>
     </div>
     );
+  }
+
+  componentWillMount() {
+    ipcRenderer.send('get-server-address')
   }
 }
 

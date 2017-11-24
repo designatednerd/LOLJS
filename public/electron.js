@@ -44,6 +44,10 @@ function createMainWindow() {
     window.once('ready-to-show', () => {
       mainWindow.show();
     });
+
+    ipcMain.on('get-server-address', (event) => {
+      event.sender.send('server-address', 'http://localhost:' + serverPort)
+    })   
     
     return window;
 }
